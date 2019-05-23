@@ -10,15 +10,9 @@ class GeneticAlgorithmStrategy(Strategy):
         Strategy.__init__(self, origin_city, possible_trip_cities, required_cities, max_trip_time,
                           max_execution_time)
 
-        # Get population size
-        max_different_solutions = 2 ** len(possible_trip_cities)
-        population_size = int(max_different_solutions / 3)
-        if population_size > 100:
-            population_size = 100
-
         self.genetic_algorithm = GeneticAlgorithm(origin_city, possible_trip_cities,
                                                   required_cities,
-                                                  max_trip_time, population_size=population_size,
+                                                  max_trip_time, population_size=100,
                                                   mutation_probability=0,
                                                   percentage_random_individuals=0.25)
         self.best_solutions = []

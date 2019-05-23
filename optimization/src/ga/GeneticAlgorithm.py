@@ -111,7 +111,7 @@ class GeneticAlgorithm:
             self.best_individual = generation_best_individual.clone()
             self.generations_without_improvement_count = 0
         elif generation_best_individual.get_fitness() == self.best_individual.get_fitness():
-            if generation_best_individual.solution.get_total_trip_time() < self.best_individual.solution.get_total_trip_time():
+            if generation_best_individual.solution.get_total_travel_time() < self.best_individual.solution.get_total_travel_time():
                 # Update generation_best_individual as first objective fitness is same but
                 # second objective travel time is better
                 self.best_individual = generation_best_individual.clone()
@@ -137,7 +137,7 @@ class GeneticAlgorithm:
         children = []
         for _ in range(self.children_size):
             done = False
-            max_try = self.children_size * 10
+            max_try = 5
             i = 0
             while not done:
                 i += 1
