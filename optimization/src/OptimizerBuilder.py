@@ -6,6 +6,8 @@ from optimization.src.GeneticAlgorithmStrategy import GeneticAlgorithmStrategy
 from optimization.src.Optimizer import Optimizer
 from optimization.src.RandomSearchStrategy import RandomSearchStrategy
 from optimization.src.RatioHeuristicStrategy import RatioHeuristicStrategy
+from optimization.src.Solution import Solution
+from optimization.src.TSPOptimizerClosestCityStrategy import TSPOptimizerClosestCityStrategy
 
 
 class OptimizerBuilder:
@@ -89,6 +91,19 @@ class OptimizerBuilder:
                                required_city_names, stay_times, values, travel_times)
         return optimizer
 
+    def is_valid(self, origin_city, required_cities, max_trip_time):
+        if len(required_cities) == 0:
+            return True
+        solution = Solution(origin_city, required_cities, required_cities, max_trip_time)
+        optimizer = TSPOptimizerClosestCityStrategy(origin_city, solution.cities)
+        solution.cities = optimizer.optimize()
+        if not solution.is_valid():
+            solution.print()
+            print()
+            print("NOT VALID SOLUTION WITH ONLY REQUIRED CITIES")
+            return False
+        return True
+
     def build(self, max_execution_time, strategy_type, max_trip_time, origin_city_name,
               required_city_names, stay_times, values, travel_times):
 
@@ -97,6 +112,10 @@ class OptimizerBuilder:
         possible_trip_cities = self.__get_possible_trip_cities(origin_city_name, stay_times, values,
                                                                travel_times)
         required_cities = self.__get_required_cities(required_city_names, possible_trip_cities)
+
+        # Validate a that a valid solution with at least required cities can be constructed
+        if not self.is_valid(origin_city, required_cities, max_trip_time):
+            return None
 
         # Build strategy
         strategy = self.__build_strategy(strategy_type, origin_city, possible_trip_cities,

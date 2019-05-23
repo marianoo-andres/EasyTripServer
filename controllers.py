@@ -108,6 +108,8 @@ def optimize(username, case_name, max_execution_time, strategy):
     case_path = os.path.join('db', username.upper(), case_name + ".json")
     optimizer_builder = OptimizerBuilder()
     optimizer = optimizer_builder.build_from_api(case_path, max_execution_time, strategy)
+    if not optimizer:
+        return {"error": "Not possible to construct valid solution with required cities"}
     result = optimizer.optimize()
     with open(case_path) as f:
         case = json.load(f)
