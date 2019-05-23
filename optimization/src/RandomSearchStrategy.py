@@ -25,13 +25,13 @@ class RandomSearchStrategy(Strategy):
                 best_solution = solution
                 self.set_best_solution(best_solution)
                 best_solution_fitness = solution.fitness
-                best_solution_trip_time = solution.get_total_trip_time()
+                best_solution_trip_time = solution.get_total_travel_time()
             elif solution.fitness == best_solution_fitness:
                 if solution.get_total_travel_time() < best_solution_trip_time:
                     best_solution = solution
                     self.set_best_solution(best_solution)
                     best_solution_fitness = solution.fitness
-                    best_solution_trip_time = solution.get_total_trip_time()
+                    best_solution_trip_time = solution.get_total_travel_time()
             self.current_iteration += 1
             # self.add_good_solution(solution)
         self.improve_solutions()

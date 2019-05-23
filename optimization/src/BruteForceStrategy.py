@@ -39,7 +39,7 @@ class BruteForceStrategy(Strategy):
                     best_solution = solution
                     self.set_best_solution(best_solution)
                     best_solution_fitness = solution.fitness
-                    best_solution_trip_time = solution.get_total_trip_time()
+                    best_solution_trip_time = solution.get_total_travel_time()
                 elif solution.fitness == best_solution_fitness:
                     if solution.get_total_travel_time() < best_solution_trip_time:
                         # Update best_solution as first objective fitness is same but
@@ -47,7 +47,7 @@ class BruteForceStrategy(Strategy):
                         best_solution = solution
                         self.set_best_solution(best_solution)
                         best_solution_fitness = solution.fitness
-                        best_solution_trip_time = solution.get_total_trip_time()
+                        best_solution_trip_time = solution.get_total_travel_time()
                 # self.add_good_solution(solution)
         self.improve_solutions()
         # return self.best_solution, self.good_solutions

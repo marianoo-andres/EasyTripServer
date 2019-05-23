@@ -38,6 +38,25 @@ def update_case(username, data):
     case["origin_city"] = data["origin_city"]
     case["max_trip_time"] = data["max_trip_time"]
 
+    # Delete cities that were deleted
+    cities = data["values"].keys()
+    for city in list(case["travel_times"].keys()):
+        if city not in cities:
+            case["travel_times"].pop(city)
+        else:
+            for city2 in list(case["travel_times"][city].keys()):
+                if city2 not in cities:
+                    case["travel_times"][city].pop(city2)
+    for city in list(case["values"].keys()):
+        if city not in cities:
+            case["values"].pop(city)
+    for city in list(case["stay_times"].keys()):
+        if city not in cities:
+            case["stay_times"].pop(city)
+    for city in list(case["lat_longs"].keys()):
+        if city not in cities:
+            case["lat_longs"].pop(city)
+
     with open(case_path, "w") as file:
         json.dump(case, file, sort_keys=True, indent=4)
 
