@@ -41,7 +41,7 @@ class GeneticAlgorithmStrategy(Strategy):
         print("Generation: {}".format(self.current_iteration))
         print("Generations without improvement: {}".format(
             self.genetic_algorithm.generations_without_improvement_count))
-        if self.best_solution:
+        if self.genetic_algorithm.best_individual:
             print("Best solution (global)")
-            self.best_solution.print()
+            self.genetic_algorithm.best_individual.solution.print()
         print("\n\n")
