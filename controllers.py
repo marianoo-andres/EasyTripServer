@@ -123,4 +123,14 @@ def optimize(username, case_name, max_execution_time, strategy):
             "value": case["values"][city_name]
         })
     result["cities"] = cities
+    cities = []
+    for city_name in result["cities_not_included"]:
+        cities.append({
+            "name": city_name,
+            "latitude": case["lat_longs"][city_name]["latitude"],
+            "longitude": case["lat_longs"][city_name]["longitude"],
+            "stay_time": case["stay_times"][city_name],
+            "value": case["values"][city_name]
+        })
+    result["cities_not_included"] = cities
     return result
