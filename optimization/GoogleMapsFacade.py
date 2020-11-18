@@ -5,7 +5,7 @@ import googlemaps
 
 class GoogleMapsFacade:
     def __init__(self):
-        self.googlemapsClient = googlemaps.Client(key='AIzaSyCLV3cX1rIVhljQtwzsgPIYHHLo8NbNaq8')
+        self.googlemapsClient = googlemaps.Client(key=os.environ.get("API_KEY"))
 
     def get_travel_times(self, cities):
         """
