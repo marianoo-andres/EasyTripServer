@@ -27,4 +27,9 @@ class Optimizer:
         solution_dic["total_travel_time"] = solution.get_total_travel_time()
         solution_dic["total_trip_time"] = solution.get_total_trip_time()
         solution_dic["valid"] = solution.is_valid()
+        cities_not_included = []
+        for city in self.strategy.possible_trip_cities:
+            if city not in solution.cities:
+                cities_not_included.append(city.name)
+        solution_dic["cities_not_included"] = cities_not_included
         return solution_dic
